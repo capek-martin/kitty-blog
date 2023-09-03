@@ -1,0 +1,94 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 15%;
+  margin: 0px;
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1 {
+  font-family: Helvetica Neue;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 3rem;
+}
+
+header {
+  height: 3.5rem;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  text-align: center;
+  display: grid;
+  padding: 0 15%;
+  background-color: #f8f9fa;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  .logo {
+    height: 2.75rem;
+  }
+
+  .links {
+    display: flex;
+    li {
+      margin: 0 10px;
+      cursor: pointer;
+      text-transform: capitalize;
+      list-style: none;
+      color: #6c757d;
+    }
+  }
+  .admin-menu {
+    width: 100%;
+    display: flex;
+    li {
+      margin: 0 10px;
+      cursor: pointer;
+      text-transform: capitalize;
+      list-style: none;
+      color: #6c757d;
+    }
+  }
+
+  .avatar {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: 2rem;
+  }
+}
+
+.form-group {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
