@@ -1,4 +1,5 @@
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import { AppContent } from "./AppContent";
 import { AuthProvider } from "./hooks/authContext";
 import { BrowserRouter } from "react-router-dom";

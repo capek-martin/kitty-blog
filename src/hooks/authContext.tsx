@@ -5,15 +5,23 @@ import { apiUrl } from "../api/apiUrl";
 import { storageKeys } from "../utils/keys/storageKeys";
 import useSessionStorage from "./useSessionStorage";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { paths } from "../utils/core/routes";
 
+// TODO - user registration + uploading avatars
+interface UserInfo {
+  email: string | null;
+  avatarSrc: string;
+}
 interface AuthContextType {
-  user: any | null;
+  user: UserInfo | null;
   login?: (email: string, password: string) => void;
   logout?: () => void;
+  storedToken?: string;
 }
-
+const baseAvatar = "/images/avatar-female.jpg";
 const AuthContext = createContext<AuthContextType>({
-  user: null,
+  user: { avatarSrc: baseAvatar, email: null },
 });
 const useAuth = () => useContext<AuthContextType>(AuthContext);
 
@@ -22,9 +30,9 @@ const useAuth = () => useContext<AuthContextType>(AuthContext);
  */
 const AuthProvider = (props: any) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<any | null>();
-  const [storedUser, setStoredUser] = useSessionStorage<string | null>(
-    storageKeys.USER_EMAIL,
+  const [user, setUser] = useState<UserInfo | null>();
+  const [storedUser, setStoredUser] = useSessionStorage<UserInfo | null>(
+    storageKeys.USER,
     null
   );
   const [storedToken, setStoredToken] = useLocalStorage<string | null>(
@@ -33,13 +41,14 @@ const AuthProvider = (props: any) => {
   );
 
   useEffect(() => {
-    if (storedUser) setUser(storedUser);
+    if (storedUser) setUser({ ...storedUser, email: storedUser.email });
   }, []);
 
   /**
    * Logs in user
    * @param email
    * @param pwd
+   *
    * login("capekma1@gmail.com", "Heslo");
    */
   const login = async (email: string, pwd: string) => {
@@ -50,9 +59,11 @@ const AuthProvider = (props: any) => {
       });
       if (response?.data && response?.data?.access_token) {
         setStoredToken(response?.data?.access_token);
-        setStoredUser(email);
-        setUser(email);
-        navigate("/");
+        setStoredUser({ email: email, avatarSrc: baseAvatar });
+        setUser({ email: email, avatarSrc: baseAvatar });
+        navigate(`${paths.MY_ARTICLES}`);
+      } else {
+        toast.error("Invalid credentials");
       }
     } catch (err) {
       console.log("err:", err);

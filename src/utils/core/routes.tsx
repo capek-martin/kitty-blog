@@ -4,6 +4,8 @@ import { LoginPage } from "../../pages/Login/LoginPage";
 import { AboutPage } from "../../pages/About/About";
 import { ArticleDetail } from "../../pages/Article/ArticleDetail";
 import { ArticleCreate } from "../../pages/Article/ArticleCreate";
+import { ArticleAdminPage } from "../../pages/Article/ArticleAdminPage";
+import { ArticleEdit } from "../../pages/Article/ArticleEdit";
 
 interface AppRoute {
   path: string;
@@ -25,8 +27,16 @@ export const routes: AppRoute[] = [
     component: <ArticlesPage />,
   },
   {
+    path: `${paths.MY_ARTICLES}`,
+    component: <ArticleAdminPage />,
+  },
+  {
     path: `${paths.ARTICLES}/new`,
     component: <ArticleCreate />,
+  },
+  {
+    path: `${paths.ARTICLES}/edit/:id`,
+    component: <ArticleEdit />,
   },
   {
     path: `${paths.ARTICLES}/:id`,

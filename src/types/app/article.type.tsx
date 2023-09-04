@@ -5,24 +5,25 @@ export interface Article {
   lastUpdatedAt: Date;
   perex: string;
   title: string;
+  comments: Comment;
 }
 
 export interface ArticleInputs {
-  imageId: string;
+  imageId?: string;
   perex: string;
   title: string;
   content: string;
 }
 // *** Requests ***
 export interface ArticleCreateReq {
-  imageId: string;
+  imageId?: string;
   perex: string;
   title: string;
   content: string;
 }
 export interface ArticleUpdateReq {
   articleId: string;
-  imageId: string | null;
+  imageId?: string | null;
   perex: string;
   title: string;
   content: string;

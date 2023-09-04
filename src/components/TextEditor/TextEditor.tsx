@@ -6,9 +6,10 @@ import "./TextEditor.style.scss";
 
 interface Props {
   value: string;
-  onChange: (t: string) => void;
+  onChange?: (t: string) => void;
   toolbarOptionsExt?: any;
   style?: CSSProperties;
+  readOnly?: boolean;
 }
 
 /**
@@ -19,6 +20,7 @@ export const TextEditor = ({
   onChange,
   toolbarOptionsExt,
   style,
+  readOnly,
 }: Props) => {
   const [inputValue, setInputValue] = useState<string>(value ?? "");
 
@@ -34,14 +36,12 @@ export const TextEditor = ({
   ];
 
   useEffect(() => {
-    onChange(inputValue);
+    onChange && onChange(inputValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
-  const editorHeight = "100px";
-
   return (
-    <div className="text-editor" style={{ ...style, height: editorHeight }}>
+    <div className="text-editor" style={{ ...style }}>
       <ReactQuill
         onChange={setInputValue}
         modules={{
@@ -49,6 +49,7 @@ export const TextEditor = ({
         }}
         theme="snow"
         value={inputValue}
+        readOnly={readOnly}
       />
     </div>
   );

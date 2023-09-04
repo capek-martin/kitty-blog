@@ -9,9 +9,9 @@ interface Props {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <div style={{ display: "block" }}>
+    <>
       <Navigation />
       <Content>{children}</Content>
-    </div>
+    </>
   );
 };

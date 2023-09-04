@@ -16,16 +16,12 @@ const baseClientFiles = axios.create({
   baseURL: "/api/",
   headers: {
     "Content-Type": "multipart/form-data",
+    "X-API-KEY": "5cdb95f6-2a0c-4609-805b-644b28a4d37f",
     Accept: "*/*",
   },
 });
 
 export const authHeaders = () => {
-  // TODO - local storage
-  /* return {
-    Authorization: `Bearer 0c1af414-6120-4af6-be16-0d1b1c3e9a88`,
-  }; */
-
   let token = null;
   if (localStorage.getItem(storageKeys.BEARER_TOKEN_KEY))
     token = localStorage.getItem(storageKeys.BEARER_TOKEN_KEY);
@@ -46,22 +42,18 @@ interface ApiBaseParams {
 
 interface ApiGetParams extends ApiBaseParams {
   params?: object | null;
-  setIsOnline?: (state: boolean) => void;
 }
 
 interface ApiPostParams extends ApiBaseParams {
   data?: object | null;
-  setIsOnline?: (state: boolean) => void;
 }
 
-interface ApiPutParams extends ApiBaseParams {
+interface ApiPatchParams extends ApiBaseParams {
   data?: object | null;
-  setIsOnline?: (state: boolean) => void;
 }
 
 interface ApiDeleteParams extends ApiBaseParams {
   params?: object | null;
-  setIsOnline?: (state: boolean) => void;
 }
 
 const apiGet = async ({ url, /*params, */ config }: ApiGetParams) => {
@@ -120,9 +112,9 @@ const apiPost = async ({ url, data, config }: ApiPostParams) => {
   }
 };
 
-const apiPut = async ({ url, data, config }: ApiPutParams) => {
+const apiPatch = async ({ url, data, config }: ApiPatchParams) => {
   try {
-    const response = await baseClient.put(url, data, {
+    const response = await baseClient.patch(url, data, {
       ...config,
       headers: { ...authHeaders() },
     });
@@ -134,7 +126,7 @@ const apiPut = async ({ url, data, config }: ApiPutParams) => {
   }
 };
 
-const apiDelete = async ({ url, /*params, */ config }: ApiDeleteParams) => {
+const apiDelete = async ({ url, config }: ApiDeleteParams) => {
   try {
     const response = await baseClient.delete(url, {
       ...config,
@@ -148,18 +140,13 @@ const apiDelete = async ({ url, /*params, */ config }: ApiDeleteParams) => {
   }
 };
 
-/* export const postHeaders = {
-  headers: { "Content-Type": "application/json" },
-  withCredentials: true,
-}; */
-
 const defaultApi = {
   baseClient,
   apiGet,
   apiGetFiles,
   apiPostFiles,
   apiPost,
-  apiPut,
+  apiPatch,
   apiDelete,
 };
 export default defaultApi;

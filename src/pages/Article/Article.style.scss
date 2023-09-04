@@ -1,3 +1,17 @@
 .detail-container {
+  display: flex;
+  gap: 1.5rem;
+}
+.article-container {
   width: 47.5rem;
+}
+
+.detail-image img {
+  max-width: 100%;
+}
+
+aside {
+  width: 23.1875rem;
+  height: 37.25rem;
+  flex-shrink: 0;
 }

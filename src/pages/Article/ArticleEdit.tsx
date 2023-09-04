@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
 import { apiUrl } from "../../api/apiUrl";
 import http from "../../api/axios";
-import { useParams } from "react-router-dom";
-import { dateShowFormat } from "../../utils/core/date.types";
-import { format } from "date-fns";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArticleForm } from "./ArticleForm";
+import { SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
+import { ArticleInputs } from "../../types/app/article.type";
+import { paths } from "../../utils/core/routes";
+import { Loader } from "../../components/Loader/Loader";
 
+/**
+ * Page for editing selected article
+ */
 export const ArticleEdit = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [article, setArticle] = useState<any | null>();
 
   useEffect(() => {
     if (!id) return;
-    // createTenant();
-    // getArticles();
-    // createArticle();
+    /**
+     * Fetch selected article
+     */
     const fetchArticle = async () => {
       if (!id) return;
       const response = await http.apiGet({
@@ -25,18 +33,33 @@ export const ArticleEdit = () => {
     fetchArticle();
   }, [id]);
 
+  /**
+   * Handles update of article
+   */
+  const handleOnSubmit: SubmitHandler<ArticleInputs> = async (
+    values: ArticleInputs
+  ) => {
+    try {
+      const response = await http.apiPatch({
+        url: `${apiUrl.ARTICLES}/${id}`,
+        data: values,
+      });
+      if (response?.status === 200) {
+        toast.success("Success");
+        navigate(`${paths.HOME}`);
+      }
+    } catch (err) {
+      toast.error(`${err}`);
+    }
+  };
+
+  if (!article) return <Loader />;
   return (
     <>
-      <div className="detail-container">
-        <h1>{article?.title}</h1>
-        {article?.createdAt && (
-          <p>{format(new Date(article.createdAt), dateShowFormat)}</p>
-        )}
-        <div className="image">
-          <img src={"/gato-placeholder.png"} alt="placeholder" />
-        </div>
-        <div className="content">{article?.content}</div>
-      </div>
+      <ArticleForm
+        onSubmit={handleOnSubmit}
+        defaultValues={article as ArticleInputs}
+      />
     </>
   );
 };

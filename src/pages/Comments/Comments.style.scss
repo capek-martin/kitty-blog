@@ -1,0 +1,29 @@
+.comments-container {
+  display: flex;
+  width: 47.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.add-comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10;
+  width: 100%;
+}
+
+.comment-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
+}

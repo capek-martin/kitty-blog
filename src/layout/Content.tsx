@@ -5,5 +5,5 @@ interface Props {
 }
 
 export function Content({ children }: Props) {
-  return <main className={"content"}>{children}</main>;
+  return <main className={"main-container"}>{children}</main>;
 }

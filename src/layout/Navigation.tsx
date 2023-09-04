@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { paths } from "../utils/core/routes";
 import { useLocation } from "react-router-dom";
@@ -28,64 +28,84 @@ export const Navigation = () => {
   const activeLinkColor = `#212529`;
   return (
     <header>
-      <nav>
-        <img className="logo" src={"/logo.png"} alt={"logo"} title={"logo"} />
-        <ul className="links">
-          {navigation.map((item: NavItem, index: number) => (
-            <li
-              key={index}
-              onClick={() => navigate(item.path)}
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignContent: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <img
+            className="logo"
+            src={"/logo/logo.png"}
+            alt={"logo"}
+            title={"logo"}
+          />
+          <ul className="links">
+            {navigation.map((item: NavItem, index: number) => (
+              <li
+                key={index}
+                onClick={() => navigate(item.path)}
+                style={{
+                  color: currentPath.includes(item.path)
+                    ? activeLinkColor
+                    : undefined,
+                }}
+              >
+                <Typography className="normal">{item.title}</Typography>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          {user ? (
+            <div
               style={{
-                color: currentPath.includes(item.path)
-                  ? activeLinkColor
-                  : undefined,
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
               }}
             >
-              {item.title}
-            </li>
-          ))}
-        </ul>
-        {user ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <ul className="admin-menu">
-              {adminNavigation.map((item: NavItem, index: number) => (
-                <li
-                  key={index}
-                  onClick={() => navigate(item.path)}
-                  style={{
-                    color: currentPath.includes(item.path)
-                      ? activeLinkColor
-                      : undefined,
-                  }}
-                >
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            {/* TODO */}
-            <img
-              className="avatar"
-              src={"/avatar-female.jpg"}
-              alt={"avatar"}
-              title={"avatar"}
-            />
-          </div>
-        ) : (
-          <Button
-            onClick={() => navigate(paths.LOGIN)}
-            className="btn-login"
-            title="Log in"
-          >
-            Log in
-          </Button>
-        )}
+              <ul className="admin-menu">
+                {adminNavigation.map((item: NavItem, index: number) => (
+                  <li
+                    key={index}
+                    onClick={() => navigate(item.path)}
+                    style={{
+                      color: currentPath.includes(item.path)
+                        ? activeLinkColor
+                        : undefined,
+                    }}
+                  >
+                    <Typography className="normal">{item.title}</Typography>
+                  </li>
+                ))}
+              </ul>
+              <img
+                className="avatar"
+                src={user?.avatarSrc}
+                alt={"avatar"}
+                title={"avatar"}
+              />
+            </div>
+          ) : (
+            <Button
+              onClick={() => navigate(paths.LOGIN)}
+              className="btn-login"
+              title="Log in"
+            >
+              Log in
+            </Button>
+          )}
+        </div>
       </nav>
     </header>
   );

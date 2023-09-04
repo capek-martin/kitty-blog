@@ -4,9 +4,11 @@ html {
 }
 
 body {
-  padding: 0 15%;
-  margin: 0px;
+  font-family: Helvetica Neue;
+  font-style: normal;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 *,
@@ -16,29 +18,64 @@ body {
 }
 
 h1 {
-  font-family: Helvetica Neue;
   font-size: 2.5rem;
-  font-style: normal;
   font-weight: 500;
   line-height: 3rem;
 }
 
+h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+}
+
+p,
+a,
+.normal {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.small {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+button {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
 header {
   height: 3.5rem;
+  background-color: #f8f9fa;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  z-index: 100;
+}
+
+.main-container {
+  margin-top: 6.5rem;
+  width: 72rem;
 }
 
 nav {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  text-align: center;
-  display: grid;
-  padding: 0 15%;
-  background-color: #f8f9fa;
+  width: 72rem;
+  display: flex;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  gap: 2.5rem;
+  height: 3.5rem;
+  flex-shrink: 0;
   color: #fff;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   align-items: center;
   .logo {
     height: 2.75rem;
@@ -46,6 +83,8 @@ nav {
 
   .links {
     display: flex;
+    justify-content: flex-start;
+
     li {
       margin: 0 10px;
       cursor: pointer;
@@ -57,6 +96,8 @@ nav {
   .admin-menu {
     width: 100%;
     display: flex;
+    justify-content: flex-end;
+
     li {
       margin: 0 10px;
       cursor: pointer;
@@ -65,13 +106,12 @@ nav {
       color: #6c757d;
     }
   }
-
-  .avatar {
-    width: 2rem;
-    height: 2rem;
-    flex-shrink: 0;
-    border-radius: 2rem;
-  }
+}
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 2rem;
 }
 
 .form-group {
