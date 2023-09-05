@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { TextEditor } from "../../components/TextEditor/TextEditor";
+import { MarkdownEditor } from "../../components/MarkdownEditor/MarkdownEditor";
 import { useEffect, useState } from "react";
 import { ArticleInputs } from "../../types/app/article.type";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -80,7 +80,10 @@ export const ArticleForm = ({ onSubmit, defaultValues }: Props) => {
       <div className="form-group">
         <label htmlFor="title">Content</label>
         <div className="text-editor">
-          <TextEditor value={contentValue ?? ""} onChange={setContentValue} />
+          <MarkdownEditor
+            value={contentValue ?? ""}
+            onChange={setContentValue}
+          />
         </div>
       </div>
     </form>

@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { Comments } from "../Comments/Comments";
 import { fetchImage, placeholderImg } from "../../utils/core/file.functions";
 import "./Article.style.scss";
+import ReactMarkdown from "react-markdown";
 
 export const ArticleDetail = () => {
   const { id } = useParams();
@@ -43,11 +44,12 @@ export const ArticleDetail = () => {
         <div className="detail-image">
           <img src={imgSrc} alt="placeholder" />
         </div>
-        <span
+        <ReactMarkdown>{article?.content}</ReactMarkdown>
+        {/* <span
           dangerouslySetInnerHTML={{
             __html: article?.content,
           }}
-        />
+        /> */}
         {/* Comments */}
         <Comments article={article} refetch={fetchArticle} />
       </div>
