@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/authContext";
+import { useAuth } from "../../contexts/authContext";
 import "./LoginPage.styles.scss";
 import { Box, Typography, TextField, Button, Grid } from "@mui/material";
 

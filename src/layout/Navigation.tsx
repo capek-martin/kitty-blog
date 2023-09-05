@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { paths } from "../utils/core/routes";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../hooks/authContext";
+import { useAuth } from "../contexts/authContext";
 
 interface NavItem {
   title: string;

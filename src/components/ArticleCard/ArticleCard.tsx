@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { Article } from "../../types/app/article.type";
-import "./ArticleCard.scss";
+import "./ArticleCard.style.scss";
 import { dateShowFormat } from "../../utils/core/date.types";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../utils/core/routes";

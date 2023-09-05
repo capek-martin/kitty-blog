@@ -1,4 +1,4 @@
-import { useAuth } from "../../hooks/authContext";
+import { useAuth } from "../../contexts/authContext";
 import { Article } from "../../types/app/article.type";
 import "./Comments.style.scss";
 import http from "../../api/axios";
