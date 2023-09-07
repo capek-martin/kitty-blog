@@ -1,10 +1,4 @@
-import {
-  Button,
-  ListItemIcon,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Button, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router";
 import { paths } from "../utils/core/routes";
 import { useLocation } from "react-router-dom";
@@ -12,7 +6,6 @@ import { useAuth } from "../contexts/authContext";
 import EastIcon from "@mui/icons-material/East";
 import { CSSProperties } from "@mui/material/styles/createMixins";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import { Logout } from "@mui/icons-material";
 interface NavItem {
@@ -88,7 +81,7 @@ export const Navigation = () => {
                     : undefined,
                 }}
               >
-                <Typography className="normal">{item.title}</Typography>
+                <p className="normal">{item.title}</p>
               </li>
             ))}
           </ul>
@@ -111,7 +104,7 @@ export const Navigation = () => {
                           }
                     }
                   >
-                    <Typography className="normal">{item.title}</Typography>
+                    <p className="normal">{item.title}</p>
                   </li>
                 ))}
               </ul>

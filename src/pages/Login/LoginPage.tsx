@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/authContext";
 import "./LoginPage.style.scss";
-import { Box, Typography, TextField, Button, Grid } from "@mui/material";
+import { Box, TextField, Button, Grid } from "@mui/material";
 
 export const LoginPage = () => {
   const { login } = useAuth();
@@ -23,10 +23,8 @@ export const LoginPage = () => {
         pt: 5,
       }}
     >
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ px: 5 }}>
-        <Typography variant="h4" mb={1.5}>
-          Log in
-        </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ px: 4 }}>
+        <h4>Log in</h4>
         <TextField
           size="small"
           margin="normal"

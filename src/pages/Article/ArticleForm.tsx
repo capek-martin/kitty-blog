@@ -3,14 +3,18 @@ import { MarkdownEditor } from "../../components/MarkdownEditor/MarkdownEditor";
 import { useEffect, useState } from "react";
 import { ArticleInputs } from "../../types/app/article.type";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ImageUpload } from "./ImageUpload";
+import { ArticleImageUpload } from "./ArticleImageUpload";
 import { apiUrl } from "../../api/apiUrl";
+import { TextInput } from "../../components/TextInput/TextInput";
 
 interface Props {
   onSubmit: SubmitHandler<ArticleInputs>;
   defaultValues?: ArticleInputs;
 }
 
+/**
+ * Article form component
+ */
 export const ArticleForm = ({ onSubmit, defaultValues }: Props) => {
   const [contentValue, setContentValue] = useState<string>(
     defaultValues?.content ?? ""
@@ -18,7 +22,12 @@ export const ArticleForm = ({ onSubmit, defaultValues }: Props) => {
   const [imageId, setImageId] = useState<string | null>(
     defaultValues?.imageId ?? null
   );
-  const { register, handleSubmit, reset } = useForm<ArticleInputs>();
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors, isSubmitted },
+  } = useForm<ArticleInputs>();
 
   useEffect(() => {
     reset({ ...defaultValues });
@@ -36,8 +45,9 @@ export const ArticleForm = ({ onSubmit, defaultValues }: Props) => {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
       <div
+        className="page-header"
         style={{
-          display: "inline-flex",
+          display: "flex",
           alignContent: "center",
           alignItems: "center",
         }}
@@ -51,40 +61,36 @@ export const ArticleForm = ({ onSubmit, defaultValues }: Props) => {
           Publish article
         </Button>
       </div>
-      <div className="form-group">
-        <label htmlFor="title">Article title</label>
-        <input
-          id="title"
-          type="text"
-          placeholder="My first article"
-          {...register("title")}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="title">Perex</label>
-        <input
-          id="perex"
-          type="text"
-          placeholder="Perex"
-          {...register("perex")}
-        />
-      </div>
+      <TextInput
+        name="title"
+        label="Article title*"
+        control={control}
+        rules={{ required: "Title is required" }}
+        errors={errors?.title}
+        placeholder="My first article"
+      />
+      <TextInput
+        name="perex"
+        label="Perex*"
+        control={control}
+        rules={{ required: "Perex is required" }}
+        errors={errors.perex}
+        placeholder="Perex"
+      />
       <div className="form-group">
         <label htmlFor="title">Featured image</label>
-        <ImageUpload
+        <ArticleImageUpload
           apiPostFilesUrl={`${apiUrl.IMAGES}`}
           imageId={imageId}
           setImageId={setImageId}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="title">Content</label>
-        <div className="text-editor">
-          <MarkdownEditor
-            value={contentValue ?? ""}
-            onChange={setContentValue}
-          />
-        </div>
+        <label>Content*</label>
+        {isSubmitted && contentValue === "" && (
+          <span className="error">Content is required</span>
+        )}
+        <MarkdownEditor value={contentValue ?? ""} onChange={setContentValue} />
       </div>
     </form>
   );

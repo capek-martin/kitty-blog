@@ -1,3 +1,7 @@
 export const AboutPage = () => {
-  return <h1>About...</h1>;
+  return (
+    <div className="page-header">
+      <h1>About...</h1>
+    </div>
+  );
 };

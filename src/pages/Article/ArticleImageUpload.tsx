@@ -13,7 +13,7 @@ interface Props {
 /**
  * Image upload component
  */
-export const ImageUpload = ({
+export const ArticleImageUpload = ({
   apiPostFilesUrl,
   imageId,
   setImageId,

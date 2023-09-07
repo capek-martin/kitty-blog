@@ -52,6 +52,7 @@ const AuthProvider = (props: any) => {
    * login("capekma1@gmail.com", "Heslo");
    */
   const login = async (email: string, pwd: string) => {
+    console.log(storedToken, "storedToken");
     try {
       const response = await http.apiPost({
         url: `${apiUrl.LOGIN}`,
@@ -74,7 +75,6 @@ const AuthProvider = (props: any) => {
    * Logs user out
    */
   const logout = () => {
-    console.log("logged out");
     setStoredToken(null);
     setStoredUser(null);
     setUser(null);

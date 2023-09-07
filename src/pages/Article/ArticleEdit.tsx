@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArticleForm } from "./ArticleForm";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
-import { ArticleInputs } from "../../types/app/article.type";
+import { Article, ArticleInputs } from "../../types/app/article.type";
 import { paths } from "../../utils/core/routes";
 import { Loader } from "../../components/Loader/Loader";
 
@@ -15,7 +15,7 @@ import { Loader } from "../../components/Loader/Loader";
 export const ArticleEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [article, setArticle] = useState<any | null>();
+  const [article, setArticle] = useState<Article | null>();
 
   useEffect(() => {
     if (!id) return;
@@ -55,11 +55,9 @@ export const ArticleEdit = () => {
 
   if (!article) return <Loader />;
   return (
-    <>
-      <ArticleForm
-        onSubmit={handleOnSubmit}
-        defaultValues={article as ArticleInputs}
-      />
-    </>
+    <ArticleForm
+      onSubmit={handleOnSubmit}
+      defaultValues={article as ArticleInputs}
+    />
   );
 };

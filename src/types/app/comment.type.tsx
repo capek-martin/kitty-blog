@@ -3,7 +3,7 @@ export interface Comment {
   articleId: string;
   author: string;
   content: string;
-  postedAt: Date;
+  postedAt: string;
   score: number;
 }
 

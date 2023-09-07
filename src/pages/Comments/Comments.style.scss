@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .add-comment {
@@ -15,15 +16,34 @@
   width: 100%;
 }
 
-.comment-item-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
 .comment-item {
   display: flex;
   align-items: flex-start;
-  gap: 1.75rem;
+  margin-bottom: 1.5rem;
+  .comment-content {
+    display: flex;
+  }
+  .comment-heading {
+    display: flex;
+    align-items: center;
+    .comment-created {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.comment-vote {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  .vote-arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  margin-right: 20px;
 }

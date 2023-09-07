@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: Helvetica Neue;
+  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   min-height: 100vh;
   margin: 0;
@@ -18,6 +18,22 @@ body {
   box-sizing: inherit;
 }
 
+html,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: 500;
@@ -25,9 +41,6 @@ h1 {
 }
 h3 {
   color: #000;
-
-  /* H3 */
-  font-family: Helvetica Neue;
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 500;
@@ -40,12 +53,24 @@ h4 {
   line-height: 1.75rem;
 }
 
+h6 {
+  color: #000;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
 p,
 a,
 .normal {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .small {
@@ -62,6 +87,11 @@ a,
   border-radius: 50%;
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.error {
+  color: red;
+  padding: 5px;
 }
 
 button {
@@ -161,6 +191,10 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+}
+
+.page-header {
+  margin: 7.5rem 0 3rem 0;
 }
 
 /* MUI Datagrid */

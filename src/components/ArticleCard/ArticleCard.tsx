@@ -4,7 +4,7 @@ import "./ArticleCard.style.scss";
 import { dateShowFormat } from "../../utils/core/date.types";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../utils/core/routes";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchImage, placeholderImg } from "../../utils/core/file.functions";
 interface Props {
@@ -36,17 +36,16 @@ export const ArticleCard = ({ article }: Props) => {
         <img src={imgSrc} alt="placeholder" />
       </div>
       <div className="content">
-        <Typography variant="h4">{article?.title}</Typography>
+        <h4>{article?.title}</h4>
         <div style={{ display: "flex", alignItems: "center" }}>
           {/* Author missing in /articles/get */}
-          <Typography className="small">Anonym</Typography>
+          <p className="small">Anonym</p>
           <div className="circle"></div>
-
-          <Typography className="small" style={{ listStyleType: "" }}>
+          <p className="small" style={{ listStyleType: "" }}>
             {format(new Date(article.createdAt), dateShowFormat)}
-          </Typography>
+          </p>
         </div>
-        <Typography className="normal">{article?.perex}</Typography>
+        <p className="normal">{article?.perex}</p>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Button style={{ marginRight: 10 }} onClick={handleDetailRedirect}>
             Read whole article
@@ -54,9 +53,7 @@ export const ArticleCard = ({ article }: Props) => {
           {/* ------------------------------------ */}
           {/* Arr Comments or any ref missing in /articles/get */}
           {/* ------------------------------------ */}
-          <Typography className="small">
-            {article?.comments?.length ?? `0`} comments
-          </Typography>
+          <p className="small">{article?.comments?.length ?? `0`} comments</p>
         </div>
       </div>
     </div>

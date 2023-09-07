@@ -112,8 +112,9 @@ export const ArticleAdminPage = () => {
   return (
     <>
       <div
+        className="page-header"
         style={{
-          display: "inline-flex",
+          display: "flex",
           alignContent: "center",
           alignItems: "center",
         }}

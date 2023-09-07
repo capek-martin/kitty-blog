@@ -12,6 +12,7 @@ export const ArticlesPage = () => {
       url: `${apiUrl.ARTICLES}`,
     });
     if (response?.data && response?.data.items) {
+      // sord desc by date of creation
       const sortedArr = response?.data.items.sort((a: Article, b: Article) => {
         const dateA = new Date(a.createdAt) as any;
         const dateB = new Date(b.createdAt) as any;
@@ -28,7 +29,9 @@ export const ArticlesPage = () => {
 
   return (
     <>
-      <h1>Recent articles</h1>
+      <div className="page-header">
+        <h1>Recent articles</h1>
+      </div>
       <>
         {articles &&
           articles?.map((article: Article, index: number) => (
