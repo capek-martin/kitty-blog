@@ -1,6 +1,5 @@
 .container {
   width: 23rem;
-  // height: 20.8125rem;
   margin: 7.5rem auto 0 auto;
   flex-shrink: 0;
   border-radius: 0.5rem;
@@ -8,9 +7,4 @@
 
   /* Shadow / Larger */
   box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.17);
-
-  h1 {
-    float: left;
-    font-weight: bold;
-  }
 }

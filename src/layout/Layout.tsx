@@ -7,6 +7,9 @@ interface Props {
   children: ReactNode;
 }
 
+/**
+ * Main layout component
+ */
 export const Layout = ({ children }: Props) => {
   return (
     <>

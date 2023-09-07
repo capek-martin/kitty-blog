@@ -8,26 +8,23 @@ interface Props {
   onChange?: (t: string) => void;
   options?: Record<string, any>;
   style?: CSSProperties;
-  readOnly?: boolean;
 }
 
 /**
  * Markdown editor component - using react-simplemde-editor library
  */
-export const MarkdownEditor = ({
-  value,
-  onChange,
-  options,
-  style,
-  readOnly,
-}: Props) => {
+export const MarkdownEditor = ({ value, onChange, options, style }: Props) => {
   useEffect(() => {
     onChange && onChange(value);
   }, [value, onChange]);
 
   return (
     <div className="markdown-editor" style={style}>
-      <SimpleMDE value={value} onChange={onChange} options={options} />
+      <SimpleMDE
+        value={value}
+        onChange={onChange}
+        options={{ ...options, status: ["words"] }}
+      />
     </div>
   );
 };

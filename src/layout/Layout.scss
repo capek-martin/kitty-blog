@@ -7,6 +7,7 @@ body {
   font-family: Helvetica Neue;
   font-style: normal;
   min-height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
 }
@@ -21,6 +22,16 @@ h1 {
   font-size: 2.5rem;
   font-weight: 500;
   line-height: 3rem;
+}
+h3 {
+  color: #000;
+
+  /* H3 */
+  font-family: Helvetica Neue;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.55rem;
 }
 
 h4 {
@@ -41,12 +52,27 @@ a,
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.25rem;
+  color: var(--text-secondary, #6c757d);
+}
+
+.circle {
+  width: 5px;
+  height: 5px;
+  background-color: var(--text-secondary, #6c757d);
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 button {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.25rem;
+  text-transform: none !important;
+}
+
+.btn-login {
+  font-style: normal;
 }
 
 header {
@@ -84,7 +110,7 @@ nav {
   .links {
     display: flex;
     justify-content: flex-start;
-
+    gap: 2.5rem;
     li {
       margin: 0 10px;
       cursor: pointer;
@@ -97,16 +123,20 @@ nav {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-
+    gap: 2.5rem;
     li {
-      margin: 0 10px;
       cursor: pointer;
-      text-transform: capitalize;
       list-style: none;
       color: #6c757d;
     }
   }
 }
+
+.admin-menu ul {
+  display: flex;
+  gap: 2.5rem;
+}
+
 .avatar {
   width: 2rem;
   height: 2rem;
@@ -131,4 +161,12 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+}
+
+/* MUI Datagrid */
+.MuiDataGrid-columnHeaderTitle {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: bold !important;
+  line-height: 1.5rem;
 }

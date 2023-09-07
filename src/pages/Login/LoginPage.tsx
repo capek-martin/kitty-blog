@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/authContext";
-import "./LoginPage.styles.scss";
+import "./LoginPage.style.scss";
 import { Box, Typography, TextField, Button, Grid } from "@mui/material";
 
 export const LoginPage = () => {
@@ -23,16 +23,12 @@ export const LoginPage = () => {
         pt: 5,
       }}
     >
-      <Typography component="h1" variant="h5">
-        Log in
-      </Typography>
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        noValidate
-        sx={{ mt: 1, px: 5 }}
-      >
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ px: 5 }}>
+        <Typography variant="h4" mb={1.5}>
+          Log in
+        </Typography>
         <TextField
+          size="small"
           margin="normal"
           required
           fullWidth
@@ -45,6 +41,7 @@ export const LoginPage = () => {
           autoFocus
         />
         <TextField
+          size="small"
           margin="normal"
           required
           fullWidth

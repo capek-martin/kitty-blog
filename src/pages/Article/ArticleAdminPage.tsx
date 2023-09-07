@@ -13,7 +13,7 @@ import { AlertDialog } from "../../components/Dialogs/AlertDialog";
 import { useDeleteDialog } from "../../hooks/useDeleteDialog";
 
 /**
- * Admin view of articles
+ * Admin view and CRUD of articles
  */
 export const ArticleAdminPage = () => {
   const navigate = useNavigate();
@@ -84,7 +84,6 @@ export const ArticleAdminPage = () => {
     {
       field: "comments",
       headerName: "# of comments",
-      type: "number",
       flex: 1,
     },
     {
@@ -93,7 +92,6 @@ export const ArticleAdminPage = () => {
       sortable: false,
       disableColumnMenu: true,
       minWidth: 120,
-      align: "right",
       renderCell: (p: any) => {
         const iconStyle = { minWidth: 30, color: "#000" };
         return (

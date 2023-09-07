@@ -74,7 +74,11 @@ const AuthProvider = (props: any) => {
    * Logs user out
    */
   const logout = () => {
-    console.log("TODO");
+    console.log("logged out");
+    setStoredToken(null);
+    setStoredUser(null);
+    setUser(null);
+    navigate(`${paths.HOME}`);
   };
 
   return <AuthContext.Provider value={{ user, login, logout }} {...props} />;

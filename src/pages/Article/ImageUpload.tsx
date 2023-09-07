@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import http, { authHeaders } from "../../api/axios";
 import { toast } from "react-toastify";
 import { Button, Divider } from "@mui/material";
@@ -21,7 +21,7 @@ export const ImageUpload = ({
   const [selectedImage, setSelectedImage] = useState<
     string | null | ArrayBuffer
   >(null);
-
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const fetchImage = async () => {
     if (!imageId) return;
     await http
@@ -105,6 +105,16 @@ export const ImageUpload = ({
     }
   };
 
+  /**
+   * Uploads another file
+   */
+  const handleUploadNew = () => {
+    setSelectedImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <>
       {selectedImage ? (
@@ -112,7 +122,7 @@ export const ImageUpload = ({
           <img src={selectedImage as string} alt="Selected" width="300" />
           <br />
           <div style={{ display: "flex" }}>
-            <Button>Upload new</Button>
+            <Button onClick={handleUploadNew}>Upload new</Button>
             <Divider orientation="vertical" flexItem />
             <Button onClick={handleRemove} color="error">
               Delete
@@ -121,6 +131,7 @@ export const ImageUpload = ({
         </div>
       ) : (
         <input
+          ref={fileInputRef}
           id="contained-button-file"
           accept="image/*"
           type="file"
