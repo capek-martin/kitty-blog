@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
-import { ArticlesPage } from "../../pages/Article/ArticlePage";
 import { LoginPage } from "../../pages/Login/LoginPage";
 import { AboutPage } from "../../pages/About/About";
 import { ArticleDetail } from "../../pages/Article/ArticleDetail";
 import { ArticleCreate } from "../../pages/Article/ArticleCreate";
 import { ArticleAdminPage } from "../../pages/Article/ArticleAdminPage";
 import { ArticleEdit } from "../../pages/Article/ArticleEdit";
+import { ArticlesPage } from "../../pages/Article/ArticlePage";
 
 interface AppRoute {
   path: string;
-  component: ReactElement;
+  component: React.FC;
 }
 
 export const paths = {
@@ -24,30 +24,30 @@ export const paths = {
 export const routes: AppRoute[] = [
   {
     path: paths.HOME,
-    component: <ArticlesPage />,
+    component: ArticlesPage,
   },
   {
     path: `${paths.MY_ARTICLES}`,
-    component: <ArticleAdminPage />,
+    component: ArticleAdminPage,
   },
   {
     path: `${paths.ARTICLES}/new`,
-    component: <ArticleCreate />,
+    component: ArticleCreate,
   },
   {
     path: `${paths.ARTICLES}/edit/:id`,
-    component: <ArticleEdit />,
+    component: ArticleEdit,
   },
   {
     path: `${paths.ARTICLES}/:id`,
-    component: <ArticleDetail />,
+    component: ArticleDetail,
   },
   {
     path: paths.ABOUT,
-    component: <AboutPage />,
+    component: AboutPage,
   },
   {
     path: paths.LOGIN,
-    component: <LoginPage />,
+    component: LoginPage,
   },
 ];
