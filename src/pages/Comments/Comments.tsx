@@ -1,4 +1,4 @@
-import { useAuth } from "../../contexts/authContext";
+import { tmpAvatar, useAuth } from "../../contexts/authContext";
 import { Article } from "../../types/app/article.type";
 import "./Comments.style.scss";
 import http from "../../api/axios";
@@ -107,24 +107,26 @@ export const Comments = ({ article, refetch }: Props) => {
     <div className="comments-container">
       <h2>Comments {`(${article?.comments.length})`}</h2>
       {/* avatar + input */}
-      <div className="add-comment">
-        <img
-          className="avatar"
-          src={user?.avatarSrc}
-          alt={"avatar"}
-          title={"avatar"}
-        />
-        <input
-          id="title"
-          type="text"
-          placeholder="Join the discussion"
-          style={{ width: "100%" }}
-          onChange={(e) => setComment(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleAddComment();
-          }}
-        />
-      </div>
+      {user && (
+        <div className="add-comment">
+          <img
+            className="avatar"
+            src={user?.avatarSrc}
+            alt={"avatar"}
+            title={"avatar"}
+          />
+          <input
+            id="title"
+            type="text"
+            placeholder="Join the discussion"
+            style={{ width: "100%" }}
+            onChange={(e) => setComment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleAddComment();
+            }}
+          />
+        </div>
+      )}
       {/* other comments + votes */}
       <div className="other-comments">
         {comments.map((c: Comment, index: number) => {
@@ -133,7 +135,7 @@ export const Comments = ({ article, refetch }: Props) => {
               <div>
                 <img
                   className="avatar"
-                  src={user?.avatarSrc}
+                  src={tmpAvatar}
                   alt={"avatar"}
                   title={"avatar"}
                 />

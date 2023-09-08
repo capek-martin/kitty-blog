@@ -19,9 +19,9 @@ interface AuthContextType {
   logout?: () => void;
   storedToken?: string;
 }
-const baseAvatar = "/images/avatar-female.jpg";
+export const tmpAvatar = "/images/avatar-female.jpg";
 const AuthContext = createContext<AuthContextType>({
-  user: { avatarSrc: baseAvatar, email: null },
+  user: { avatarSrc: tmpAvatar, email: null },
 });
 const useAuth = () => useContext<AuthContextType>(AuthContext);
 
@@ -60,8 +60,8 @@ const AuthProvider = (props: any) => {
       });
       if (response?.data && response?.data?.access_token) {
         setStoredToken(response?.data?.access_token);
-        setStoredUser({ email: email, avatarSrc: baseAvatar });
-        setUser({ email: email, avatarSrc: baseAvatar });
+        setStoredUser({ email: email, avatarSrc: tmpAvatar });
+        setUser({ email: email, avatarSrc: tmpAvatar });
         navigate(`${paths.MY_ARTICLES}`);
       } else {
         toast.error("Invalid credentials");
