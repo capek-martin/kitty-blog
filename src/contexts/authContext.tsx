@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { paths } from "../utils/core/routes";
 
-// TODO - user registration + uploading avatars
+// TODO - uploading avatars
 interface UserInfo {
   email: string | null;
   avatarSrc: string;
@@ -17,8 +17,11 @@ interface AuthContextType {
   user: UserInfo | null;
   login?: (email: string, password: string) => void;
   logout?: () => void;
+  registerTenant?: (email: string, password: string) => void;
   storedToken?: string;
 }
+
+// uploading avatars not implemented yet - temp image src
 export const tmpAvatar = "/images/avatar-female.jpg";
 const AuthContext = createContext<AuthContextType>({
   user: { avatarSrc: tmpAvatar, email: null },
@@ -52,8 +55,6 @@ const AuthProvider = (props: any) => {
    * Logs in user
    * @param email
    * @param pwd
-   *
-   * login("capekma1@gmail.com", "Heslo");
    */
   const login = async (email: string, pwd: string) => {
     console.log(storedToken, "storedToken");
@@ -85,7 +86,35 @@ const AuthProvider = (props: any) => {
     navigate(`${paths.HOME}`);
   };
 
-  return <AuthContext.Provider value={{ user, login, logout }} {...props} />;
+  /**
+   * Register user, store api key
+   * @param email
+   * @param pwd
+   *
+   */
+  const registerTenant = async (email: string, pwd: string) => {
+    try {
+      const response = await http.apiPost({
+        url: `${apiUrl.TENANTS}`,
+        data: { name: email, password: pwd },
+      });
+      if (response?.data) {
+        localStorage.setItem(storageKeys.API_KEY, response?.data?.apiKey);
+        navigate(`${paths.LOGIN}`);
+        window.location.reload();
+        toast.success("User created, you can log in.");
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ user, login, logout, registerTenant }}
+      {...props}
+    />
+  );
 };
 
 export { AuthProvider, useAuth };

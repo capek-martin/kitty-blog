@@ -7,6 +7,9 @@ interface Props {
   rules: any;
   errors: any;
   placeholder: string;
+  autoFocus?: boolean;
+  autoComplete?: string;
+  type?: string;
 }
 
 export const TextInput = ({
@@ -16,6 +19,9 @@ export const TextInput = ({
   rules,
   errors,
   placeholder = "",
+  autoFocus,
+  autoComplete,
+  type = "text",
 }: Props) => {
   return (
     <div className="form-group">
@@ -24,7 +30,15 @@ export const TextInput = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <input id={name} type="text" placeholder={placeholder} {...field} />
+          <input
+            autoFocus={autoFocus}
+            autoComplete={autoComplete}
+            id={name}
+            type={type}
+            placeholder={placeholder}
+            style={{ width: "100%" }}
+            {...field}
+          />
         )}
         rules={rules}
       />

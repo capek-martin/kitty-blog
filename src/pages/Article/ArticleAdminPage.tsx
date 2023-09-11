@@ -137,7 +137,12 @@ export const ArticleAdminPage = () => {
         </Button>
       </div>
 
-      <div style={{ height: "100%", width: "100%" }}>
+      <div
+        style={{
+          height: articles?.lenght > 0 ? "100%" : "10vh",
+          width: "100%",
+        }}
+      >
         <DataGrid
           rows={articles ?? []}
           columns={columns}

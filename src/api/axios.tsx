@@ -4,7 +4,7 @@ import { storageKeys } from "../utils/keys/storageKeys";
 
 const commonHeaders = {
   "Content-Type": "application/json",
-  "X-API-KEY": "5cdb95f6-2a0c-4609-805b-644b28a4d37f",
+  "X-API-KEY": localStorage.getItem(storageKeys.API_KEY),
 };
 
 const baseClient = axios.create({
@@ -16,7 +16,7 @@ const baseClientFiles = axios.create({
   baseURL: "/api/",
   headers: {
     "Content-Type": "multipart/form-data",
-    "X-API-KEY": "5cdb95f6-2a0c-4609-805b-644b28a4d37f",
+    "X-API-KEY": localStorage.getItem(storageKeys.API_KEY),
     Accept: "*/*",
   },
 });

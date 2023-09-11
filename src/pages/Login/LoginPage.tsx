@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/authContext";
 import "./LoginPage.style.scss";
-import { Box, TextField, Button, Grid, Alert } from "@mui/material";
+import { Box, Button, Alert } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { TextInput } from "../../components/TextInput/TextInput";
+import { UserInputs } from "../../types/app/user.type";
 
+/**
+ * User login / registration page
+ */
 export const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, registerTenant } = useAuth();
   const location = useLocation();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [isRegister, setIsRegister] = useState<boolean>(false);
   const isRestricted = location?.state && location?.state?.restricted;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    login && login(email, password);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm<UserInputs>();
+
+  const onSubmit: SubmitHandler<UserInputs> = (data) => {
+    if (isRegister) {
+      registerTenant && registerTenant(data.email, data.password);
+      setIsRegister(false);
+    } else {
+      login && login(data.email, data.password);
+    }
   };
+
+  useEffect(() => {
+    reset({ email: "", password: "" });
+  }, [isRegister]);
 
   return (
     <>
@@ -40,42 +60,51 @@ export const LoginPage = () => {
             You´re trying to reach restricted area. Please sign in first!
           </Alert>
         )}
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ px: 4 }}>
-          <h4>Log in</h4>
-          <TextField
-            size="small"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            placeholder="me@example.com"
-            onChange={(e) => setEmail(e.target.value)}
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ width: "100%", px: 4 }}
+        >
+          <h4>{isRegister ? `Register` : `Log in`}</h4>
+          <TextInput
             autoFocus
+            name="email"
+            label="Email address*"
+            control={control}
+            rules={{ required: "Email is required" }}
+            errors={errors}
+            placeholder="me@example.com"
+            type="email"
           />
-          <TextField
-            size="small"
-            margin="normal"
-            required
-            fullWidth
+          <TextInput
+            autoFocus
             name="password"
-            label="Password"
-            type="password"
-            id="password"
+            label="Password*"
+            control={control}
+            rules={{ required: "Password is required" }}
+            errors={errors}
             placeholder="**********"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            type="password"
           />
+
           <Button
             type="submit"
             variant="contained"
             sx={{ mt: 3, mb: 2, float: "right" }}
           >
-            Log in
+            {isRegister ? `Register` : `Log in`}
           </Button>
-          <Grid container></Grid>
+          {isRegister ? (
+            <span className="link" onClick={() => setIsRegister(false)}>
+              Already have account?
+            </span>
+          ) : (
+            <span className="link" onClick={() => setIsRegister(true)}>
+              Dont have account yet?
+            </span>
+          )}
         </Box>
       </Box>
     </>
