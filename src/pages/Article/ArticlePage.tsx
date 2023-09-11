@@ -4,6 +4,9 @@ import { apiUrl } from "../../api/apiUrl";
 import { Article } from "../../types/app/article.type";
 import { ArticleCard } from "../../components/ArticleCard/ArticleCard";
 
+/**
+ * Main view of articles
+ */
 export const ArticlesPage = () => {
   const [articles, setArticles] = useState<Article[]>();
 

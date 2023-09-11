@@ -1,9 +1,15 @@
 module.exports = {
+  testEnvironment: "jsdom",
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        useESM: true,
+      },
+    ],
     "^.+\\.(js|jsx)$": "babel-jest",
   },
-  testEnvironment: "jsdom",
+  moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx", "node"],
   moduleNameMapper: {
     "next/router": "<rootDir>/__mocks__/next/router.js",
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
@@ -13,9 +19,4 @@ module.exports = {
       "<rootDir>/node_modules/react-markdown/react-markdown.min.js",
   },
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
-  globals: {
-    "ts-jest": {
-      useESM: true,
-    },
-  },
 };

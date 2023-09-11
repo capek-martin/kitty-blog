@@ -6,9 +6,10 @@ import { useLocation } from "react-router-dom";
 
 export const LoginPage = () => {
   const { login } = useAuth();
-  const { state } = useLocation();
+  const location = useLocation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const isRestricted = location?.state && location?.state?.restricted;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export const LoginPage = () => {
           pt: 5,
         }}
       >
-        {state && state?.restricted && (
+        {isRestricted && (
           <Alert
             severity="error"
             style={{

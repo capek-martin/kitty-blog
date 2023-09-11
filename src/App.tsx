@@ -8,8 +8,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppContent />
         <ToastContainer />
+        <AppContent />
       </AuthProvider>
     </BrowserRouter>
   );

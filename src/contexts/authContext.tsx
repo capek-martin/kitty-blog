@@ -41,7 +41,11 @@ const AuthProvider = (props: any) => {
   );
 
   useEffect(() => {
-    if (storedUser) setUser({ ...storedUser, email: storedUser.email });
+    if (storedUser) {
+      setUser({ ...storedUser, email: storedUser.email });
+    } else {
+      setUser(null);
+    }
   }, []);
 
   /**
@@ -63,11 +67,11 @@ const AuthProvider = (props: any) => {
         setStoredUser({ email: email, avatarSrc: tmpAvatar });
         setUser({ email: email, avatarSrc: tmpAvatar });
         navigate(`${paths.MY_ARTICLES}`);
-      } else {
+      } else if (!response) {
         toast.error("Invalid credentials");
       }
-    } catch (err) {
-      console.log("err:", err);
+    } catch (err: any) {
+      toast.error(err.message);
     }
   };
 

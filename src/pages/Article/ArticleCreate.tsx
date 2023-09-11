@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import { paths } from "../../utils/core/routes";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Page for creating article
+ */
 export const ArticleCreate = () => {
   const navigate = useNavigate();
 
@@ -27,9 +30,5 @@ export const ArticleCreate = () => {
     }
   };
 
-  return (
-    <>
-      <ArticleForm onSubmit={handleOnSubmit} />
-    </>
-  );
+  return <ArticleForm onSubmit={handleOnSubmit} />;
 };

@@ -5,7 +5,6 @@ import { useAuth } from "./contexts/authContext";
 
 export const AppContent = () => {
   const { user } = useAuth();
-
   return (
     <>
       <Layout>
@@ -15,7 +14,7 @@ export const AppContent = () => {
               key={path}
               path={path}
               element={
-                isRestricted && !user ? (
+                isRestricted && user === null ? (
                   <Navigate
                     to={paths.LOGIN}
                     replace={true}

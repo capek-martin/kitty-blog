@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import http from "../../api/axios";
 import { apiUrl } from "../../api/apiUrl";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Loader } from "../../components/Loader/Loader";
 import { Button } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -96,10 +95,19 @@ export const ArticleAdminPage = () => {
         const iconStyle = { minWidth: 30, color: "#000" };
         return (
           <>
-            <Button onClick={() => handleEdit(p.id)} style={iconStyle}>
+            <Button
+              data-testid="btn-edit-article"
+              aria-label="Edit article"
+              onClick={() => handleEdit(p.id)}
+              style={iconStyle}
+            >
               <EditOutlinedIcon />
             </Button>
-            <Button onClick={() => handleOnDelete(p.id)} style={iconStyle}>
+            <Button
+              aria-label="Delete article"
+              onClick={() => handleOnDelete(p.id)}
+              style={iconStyle}
+            >
               <DeleteOutlineIcon />
             </Button>
           </>
@@ -108,7 +116,6 @@ export const ArticleAdminPage = () => {
     },
   ];
 
-  if (!articles) return <Loader />;
   return (
     <>
       <div
@@ -124,14 +131,15 @@ export const ArticleAdminPage = () => {
           onClick={handleCreate}
           variant="contained"
           style={{ marginLeft: "2rem" }}
+          name="Create new article"
         >
           Create new article
         </Button>
       </div>
 
-      <div style={{ height: "70vh", width: "100%" }}>
+      <div style={{ height: "100%", width: "100%" }}>
         <DataGrid
-          rows={articles}
+          rows={articles ?? []}
           columns={columns}
           getRowId={(row) => row?.articleId}
           sx={{ "&": { border: "none" } }}

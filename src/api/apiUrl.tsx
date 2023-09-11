@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://fullstack.exercise.applifting.cz";
+export const API_BASE_URL = "https://fullstack.exercise.applifting.cz";
 
 export const apiUrl = {
   LOGIN: `${API_BASE_URL}/login`,
