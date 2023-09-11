@@ -13,7 +13,7 @@ This is a testing project and serves as a demonstration of my frontend developme
 - 👍👎 Voting on comments
 - 👨 Profile editing
 
-## Main technologies Used
+## Main technologies used
 - React.js
 - TypeScript
 - Testing Library (Jest)
